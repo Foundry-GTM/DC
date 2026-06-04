@@ -1,26 +1,154 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Track B brand palette
+  INK    #0B0B12  near-black
+  PAPER  #F4EFE6  warm off-white
+  INDIGO #3B3DBF  primary brand
+  RUST   #B5482A  accent / warm
+*/
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --radius: 0.625rem;
+
+  /* Brand primitives */
+  --ink: #0b0b12;
+  --paper: #f4efe6;
+  --indigo: #3b3dbf;
+  --rust: #b5482a;
+
+  /* Light theme: PAPER surface, INK text */
+  --background: #f4efe6;
+  --foreground: #0b0b12;
+  --card: #fbf8f2;
+  --card-foreground: #0b0b12;
+  --popover: #fbf8f2;
+  --popover-foreground: #0b0b12;
+  --primary: #3b3dbf;
+  --primary-foreground: #f4efe6;
+  --secondary: #e9e1d3;
+  --secondary-foreground: #0b0b12;
+  --muted: #e9e1d3;
+  --muted-foreground: #5a574f;
+  --accent: #b5482a;
+  --accent-foreground: #f4efe6;
+  --destructive: #b5482a;
+  --destructive-foreground: #f4efe6;
+  --border: #ddd4c4;
+  --input: #ddd4c4;
+  --ring: #3b3dbf;
+
+  --chart-1: #3b3dbf;
+  --chart-2: #b5482a;
+  --chart-3: #0b0b12;
+  --chart-4: #6e6fd6;
+  --chart-5: #cf6a4d;
+
+  --sidebar: #fbf8f2;
+  --sidebar-foreground: #0b0b12;
+  --sidebar-primary: #3b3dbf;
+  --sidebar-primary-foreground: #f4efe6;
+  --sidebar-accent: #e9e1d3;
+  --sidebar-accent-foreground: #0b0b12;
+  --sidebar-border: #ddd4c4;
+  --sidebar-ring: #3b3dbf;
+}
+
+.dark {
+  /* Dark theme: INK surface, PAPER text */
+  --background: #0b0b12;
+  --foreground: #f4efe6;
+  --card: #14141f;
+  --card-foreground: #f4efe6;
+  --popover: #14141f;
+  --popover-foreground: #f4efe6;
+  --primary: #6e6fd6;
+  --primary-foreground: #0b0b12;
+  --secondary: #1e1e2c;
+  --secondary-foreground: #f4efe6;
+  --muted: #1e1e2c;
+  --muted-foreground: #a8a296;
+  --accent: #cf6a4d;
+  --accent-foreground: #0b0b12;
+  --destructive: #cf6a4d;
+  --destructive-foreground: #0b0b12;
+  --border: #2a2a3a;
+  --input: #2a2a3a;
+  --ring: #6e6fd6;
+
+  --chart-1: #6e6fd6;
+  --chart-2: #cf6a4d;
+  --chart-3: #f4efe6;
+  --chart-4: #3b3dbf;
+  --chart-5: #b5482a;
+
+  --sidebar: #14141f;
+  --sidebar-foreground: #f4efe6;
+  --sidebar-primary: #6e6fd6;
+  --sidebar-primary-foreground: #0b0b12;
+  --sidebar-accent: #1e1e2c;
+  --sidebar-accent-foreground: #f4efe6;
+  --sidebar-border: #2a2a3a;
+  --sidebar-ring: #6e6fd6;
 }
 
 @theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Brand tokens — usable as bg-ink, text-paper, bg-indigo, text-rust */
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-indigo: var(--indigo);
+  --color-rust: var(--rust);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+  }
 }
